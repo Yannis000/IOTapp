@@ -1,3 +1,5 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:iot/ui/list_object.dart';
 import 'package:provider/provider.dart';
@@ -7,7 +9,6 @@ import '../vm/home_view_model.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
-
   final String title;
 
   @override
@@ -33,9 +34,9 @@ class _MyHomePageState extends State<MyHomePage> {
             appBar: AppBar(
               title: Text(widget.title),
             ),
-            body: Center(
-              child: model.objects != null
-                  ? ObjectList(model.objects ?? [])
+            body: Container(
+              child: model.objects.isNotEmpty
+                  ? ObjectList(model.objects)
                   : const Center(child: CircularProgressIndicator()),
             ),
             floatingActionButton: FloatingActionButton(
